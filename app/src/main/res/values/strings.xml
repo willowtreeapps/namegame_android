@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Name Game</string>
+    <string name="question">Who is %s?</string>
+    <string name="cdFace">A face</string>
+</resources>
