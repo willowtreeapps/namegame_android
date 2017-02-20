@@ -1,6 +1,6 @@
 # The Namegame: Android
 
-Leading scientists have proven, via science, that learning your coworkers names while starting a new job is useful. Your test project is to make it happen! The api is located at [http://api.namegame.willowtreemobile.com/](http://api.namegame.willowtreemobile.com/).
+Leading scientists have proven, via science, that learning your coworkers names while starting a new job is useful. Your test project is to make it happen! The api is located at [http://www.willowtreeapps.com/api/v1.0/profiles](http://www.willowtreeapps.com/api/v1.0/profiles).
 
 
 ## Your mission
