@@ -16,7 +16,8 @@ import com.squareup.picasso.Picasso;
 import com.willowtreeapps.namegame.R;
 import com.willowtreeapps.namegame.core.ListRandomizer;
 import com.willowtreeapps.namegame.core.NameGameApplication;
-import com.willowtreeapps.namegame.network.api.Person;
+import com.willowtreeapps.namegame.network.api.model.Person;
+import com.willowtreeapps.namegame.network.api.model.Profiles;
 import com.willowtreeapps.namegame.util.CircleBorderTransform;
 import com.willowtreeapps.namegame.util.Ui;
 
@@ -73,13 +74,14 @@ public class NameGameFragment extends Fragment {
     /**
      * A method for setting the images from people into the imageviews
      */
-    private void setImages(List<ImageView> faces, List<Person> people) {
+    private void setImages(List<ImageView> faces, Profiles profiles) {
+        List<Person> people = profiles.getPeople();
         int imageSize = (int) Ui.convertDpToPixel(100, getContext());
         int n = faces.size();
+
         for (int i = 0; i < n; i++) {
             ImageView face = faces.get(i);
-
-            picasso.load(people.get(i).getUrl())
+            picasso.load(people.get(i).getHeadshot().getUrl())
                     .placeholder(R.drawable.ic_face_white_48dp)
                     .resize(imageSize, imageSize)
                     .transform(new CircleBorderTransform())
@@ -100,7 +102,8 @@ public class NameGameFragment extends Fragment {
 
     /**
      * A method to handle when a person is selected
-     * @param view The view that was selected
+     *
+     * @param view   The view that was selected
      * @param person The person that was selected
      */
     private void onPersonSelected(@NonNull View view, @NonNull Person person) {

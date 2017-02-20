@@ -1,13 +1,11 @@
 package com.willowtreeapps.namegame.network.api;
 
-import java.util.List;
+import com.willowtreeapps.namegame.network.api.model.Profiles;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface NameGameApi {
-
-    @GET("http://api.namegame.willowtreemobile.com/")
-    Call<List<Person>> getPeople();
-
+    @GET("/api/v1.0/profiles")
+    Call<Profiles> getProfiles();
 }

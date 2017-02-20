@@ -5,62 +5,59 @@ import android.os.Parcel;
 
 import com.google.gson.Gson;
 import com.willowtreeapps.namegame.BuildConfig;
+import com.willowtreeapps.namegame.network.api.model.Person;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
-import static org.junit.Assert.*;
-
-/**
- * Created by charlie on 3/16/16.
- */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class PersonTest {
 
     private Gson gson;
+    private String testString;
 
     @Before
     public void setUp() throws Exception {
         gson = new Gson();
+        testString = "{\n" +
+                "      \"id\": \"4NCJTL13UkK0qEIAAcg4IQ\",\n" +
+                "      \"type\": \"people\",\n" +
+                "      \"slug\": \"joel-garrett\",\n" +
+                "      \"jobTitle\": \"Senior Software Engineer\",\n" +
+                "      \"firstName\": \"Joel\",\n" +
+                "      \"lastName\": \"Garrett\",\n" +
+                "      \"headshot\": {\n" +
+                "        \"type\": \"image\",\n" +
+                "        \"mimeType\": \"image/jpeg\",\n" +
+                "        \"id\": \"4Mv2CONANym46UwuuCIgK\",\n" +
+                "        \"url\": \"//images.contentful.com/3cttzl4i3k1h/4Mv2CONANym46UwuuCIgK/cbeb43c93a843a43c07b1de9954795e2/headshot_joel_garrett.jpg\",\n" +
+                "        \"alt\": \"headshot joel garrett\",\n" +
+                "        \"height\": 340,\n" +
+                "        \"width\": 340\n" +
+                "      },\n" +
+                "      \"socialLinks\": [\n" +
+                "        \n" +
+                "      ]\n" +
+                "    }";
     }
 
     @Test
     public void testFromGson() throws Exception {
-        String testString = "{\n" +
-                "name: \"Some Guy\"\n" +
-                "}";
-
         Person person = gson.fromJson(testString, Person.class);
 
-        assertEquals("Names should match", "Some Guy", person.getName());
-        assertEquals("Urls should be the name replaced with underscores",
-                "http://willowtreeapps.com/wp-content/uploads/2014/12/Some_Guy.jpg",
-                person.getUrl());
+        // Test name
+        Assert.assertEquals("First name should match", "Joel", person.getFirstName());
+        Assert.assertEquals("Last name should match", "Garrett", person.getLastName());
 
-    }
-
-    @Test
-    public void testGetName() throws Exception {
-        Person person = new Person("Some Guy");
-
-        assertEquals("Names should match", "Some Guy", person.getName());
-    }
-
-    @Test
-    public void testGetUrl() throws Exception {
-        Person person = new Person("Some Guy");
-
-        assertEquals("Urls should be the name replaced with underscores",
-                "http://willowtreeapps.com/wp-content/uploads/2014/12/Some_Guy.jpg",
-                person.getUrl());
-    }
-
-    @Test
-    public void testDescribeContents() throws Exception {
+        // Test headshot url
+        Assert.assertEquals("Headshot url should match",
+                "//images.contentful.com/3cttzl4i3k1h/4Mv2CONANym46UwuuCIgK/cbeb43c93a843a43c07b1de9954795e2/headshot_joel_garrett.jpg",
+                person.getHeadshot().getUrl());
 
     }
 
@@ -69,7 +66,7 @@ public class PersonTest {
         Parcel parcel = Parcel.obtain();
 
         //Write ourselves to the parcel
-        Person person = new Person("Some Guy");
+        Person person = gson.fromJson(testString, Person.class);
         person.writeToParcel(parcel, 0);
 
         // After you're done with writing, you need to reset the parcel for reading:
@@ -78,9 +75,13 @@ public class PersonTest {
         // Reconstruct object from parcel and asserts:
         person = Person.CREATOR.createFromParcel(parcel);
 
-        assertEquals("Names should match", "Some Guy", person.getName());
-        assertEquals("Urls should be the name replaced with underscores",
-                "http://willowtreeapps.com/wp-content/uploads/2014/12/Some_Guy.jpg",
-                person.getUrl());
+        // Test name
+        Assert.assertEquals("First name should match", "Joel", person.getFirstName());
+        Assert.assertEquals("Last name should match", "Garrett", person.getLastName());
+
+        // Test headshot url
+        Assert.assertEquals("Headshot url should match",
+                "//images.contentful.com/3cttzl4i3k1h/4Mv2CONANym46UwuuCIgK/cbeb43c93a843a43c07b1de9954795e2/headshot_joel_garrett.jpg",
+                person.getHeadshot().getUrl());
     }
 }
