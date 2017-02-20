@@ -27,7 +27,7 @@ public class NameGameApplication extends Application {
     protected ApplicationComponent buildComponent() {
         return DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
-                .networkModule(new NetworkModule("http://api.namegame.willowtreemobile.com/"))
+                .networkModule(new NetworkModule("https://willowtreeapps.com/"))
                 .build();
     }
 }
