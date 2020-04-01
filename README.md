@@ -1,31 +1,24 @@
-# The Namegame: Android
+# The Name Game for Android
 
-Leading scientists have proven, via science, that learning your coworkers names while starting a new job is useful. Your test project is to make it happen! The api is located at [http://www.willowtreeapps.com/api/v1.0/profiles](http://www.willowtreeapps.com/api/v1.0/profiles).
+Leading scientists have proven, via science, that learning your coworkers names while starting a new job is useful. Your test project is to make it happen!
 
 
 ## Your mission
 
-Present the user with six faces and ask them to identify the listed name. To spruce things up, implement a few features of your choice.
+1. Use this [JSON API](https://willowtreeapps.com/api/v1.0/profiles/), which returns a list of employees along with their headshots, as a datasource for the game. A swagger spec for this API will be created soon to use as a reference.
 
-1. Stat tracking. How many correct / incorrect attempts did the user make? How long does it take on average for a person to identify the subject?
-2. Spruce up transitions and image loading.  Don't let images pop in and show the user that loading is happening
-3. Game modes:
-    * Mat(t) Mode. Roughly 90% of our co-workers are named Mat(t), so add a challenge mode where you only present the users with A Mat(t).
-    * Reverse mode: Show one face with 5 names. Ask the user to identify the correct name.
-4. Hint mode. As people wait, faces disappear until only the correct one is left.
-5. Insert your own idea here!
+2. Use [these Figma designs](https://www.figma.com/file/yUzRfmltt1m1UT9UkKL3y6/namegame?node-id=177%3A0) as a reference for your implementation of the game. Try to match these designs as closely as possible. All assets are either system defaults or can be exported from Figma directly.
 
+3. Include an app icon, main menu, and game screen as shown in the designs. Don't forget to support both landscape and portrait mode.
 
-## Notes:
-1. This exercise should take no more than 8 hours, please do not spend more than that!
-2. The app needs to support portrait and landscape without using the manifest flag android:configChanges. Note that we're curious how you might go about solving for destroyed activities and fragments. 
-3. This skeleton project worked off of an old version of the API. So you'll have to update the models appropriately
+![Landscape Main Menu](assets/screenshots/landscape_home.png)
 
-When reviewing your project, we will be focusing on the following areas:
-* Code architecture
-* Code quality
-* Code correctness
-* Overall creativity
-Note: Feel free to include a text file describing your thoughts and approach if you feel that's appropriate. 
+4. Clicking "Practice Mode" or "Timed Mode" on the menu screen will navigate to the game screen. On the game screen, the game will select 6 employees at random from the list of employees and display their headshots in random order. Out of the 6, the name of one of those random employees will appear on the screen.
 
-Good luck and have fun!
+5. The user must select the headshot that belongs to that person. If they guess correct the application will show that and a new 6 random employees will be displayed along with another name.
+
+6. In practice mode this will continue until a user guesses incorrectly in which case the screen will say "Game Over!" and display their score. Clicking "OK" will navigate them back to the Menu.
+
+7. In timed mode the user will be able to make incorrect guesses until they find the correct user, in which case a new set of random employees will be displayed. This mode ends when a timer runs out, feel free to make the timer as long or short as you would like. Once the timer runs out, their score is displayed and clicking "OK" navigates them back to the Menu.
+
+8. You can implement this app however you choose, that said, your Name Game test project will be evaluated according to this rubric.
